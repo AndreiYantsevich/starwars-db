@@ -1,4 +1,5 @@
 import axios from "axios";
+import {IPeople} from "../store/reducers/types";
 
 
 const instance = axios.create({
@@ -7,7 +8,7 @@ const instance = axios.create({
 
 export const StarwarsService = {
     getAllPeople() {
-        return instance.get('people/')
+        return instance.get<getAllPeopleResponseType>('people/')
     },
     getPeopleById(id: number) {
         return instance.get('people/' + id)
@@ -24,4 +25,11 @@ export const StarwarsService = {
     getPlanetsById(id: number) {
         return instance.get('planets/' + id)
     }
+}
+
+type getAllPeopleResponseType = {
+    count: number
+    next: string,
+    previous: null | string
+    results: Array<IPeople>
 }

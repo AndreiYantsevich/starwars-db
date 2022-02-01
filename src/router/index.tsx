@@ -1,12 +1,12 @@
 import React from "react";
-import People from "../components/people/People";
+import Peoples from "../components/people/Peoples";
 import Starships from "../components/starships/Starships";
 import Planets from "../components/planets/Planets";
 import MainPage from "../components/main/MainPage";
 
 export interface IRoute {
     path: string;
-    element: React.ComponentType
+    element: any
 }
 
 export enum RouteNames {
@@ -18,7 +18,7 @@ export enum RouteNames {
 
 export const routes: IRoute[] = [
     {path: RouteNames.MAIN, element: MainPage},
-    {path: RouteNames.PEOPLE, element: People},
+    {path: RouteNames.PEOPLE, element: Peoples},
     {path: RouteNames.STARSHIPS, element: Starships},
     {path: RouteNames.PLANETS, element: Planets},
 ]

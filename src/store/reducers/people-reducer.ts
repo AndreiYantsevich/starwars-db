@@ -1,27 +1,36 @@
-import {ThunkType} from "../store";
+import {AppDispatch, ThunkType} from "../store";
+import {StarwarsService} from "../../api/StarwarsService";
+import {IPeople} from "./types";
 
 enum PeopleActionsEnum {
     GET_ALL_PEOPLE = 'GET_ALL_PEOPLE',
     GET_PEOPLE_BY_ID = 'GET_PEOPLE_BY_ID'
 }
 
-type PeopleState = {}
 type PeopleActions =
     ReturnType<typeof setAllPeople> |
     ReturnType<typeof setPeopleById>
 
-const initialState: PeopleState = {}
+type InitialStateType = typeof initialState
 
-export const PeopleReducer = (state = initialState, action: PeopleActions): PeopleState => {
+const initialState: Array<IPeople> = []
+
+
+export const PeopleReducer = (state = initialState, action: PeopleActions): InitialStateType => {
     switch (action.type) {
+        case PeopleActionsEnum.GET_ALL_PEOPLE:
+            return action.peoples.map(p => ({...p}))
         default:
             return state
     }
 }
 
-export const setAllPeople = () => ({type: PeopleActionsEnum.GET_ALL_PEOPLE} as const)
+export const setAllPeople = (peoples: Array<IPeople>) => ({type: PeopleActionsEnum.GET_ALL_PEOPLE, peoples} as const)
 export const setPeopleById = (id: number) => ({type: PeopleActionsEnum.GET_PEOPLE_BY_ID, id} as const)
 
-export const fetchAllPeople = (): ThunkType => dispatch => {
-
+export const fetchAllPeople = (): ThunkType => (dispatch: AppDispatch) => {
+    StarwarsService.getAllPeople()
+        .then((res) => {
+            dispatch(setAllPeople(res.data.results))
+        })
 }
