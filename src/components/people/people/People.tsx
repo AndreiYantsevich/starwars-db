@@ -1,6 +1,5 @@
 import React, {FC} from 'react';
 import {IStarship} from "../../../store/reducers/types";
-import {Card, Layout, Row} from "antd";
 
 type PropsType = {
     name: string
@@ -11,12 +10,12 @@ type PropsType = {
 
 const People: FC<PropsType> = (props) => {
     return (
-        <Layout>
-            <Row justify='space-between' align='top'>
-                <Card>{props.name}</Card>
-                <Card>{props.gender}</Card>
-            </Row>
-        </Layout>
+        <div>
+            <div>
+                <span>{props.name}</span>
+                <span>{props.gender}</span>
+            </div>
+        </div>
     );
 };
 
