@@ -12,7 +12,7 @@ const PeopleList: FC<PropsType> = ({peoples, title}) => {
         <div>
             <h1 style={{textAlign: 'center'}}>{title}</h1>
             {peoples.map((p) =>
-                <PeopleItem key={p.name} people={p}/>
+                <PeopleItem key={p.uid} people={p}/>
             )}
         </div>
     );

@@ -1,22 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useParams} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchPeopleById} from "../../store/reducers/people-reducer";
 import {RootState} from "../../store/store";
 import {IPeople} from "../../store/reducers/types";
 
 const PeopleIdPage = () => {
-    const {id} = useParams()
-    const people = useSelector<RootState, Array<IPeople>>(state => state.people.peoples)
+    const params = useParams()
+    const people = useSelector<RootState, Array<IPeople>>(state => state.people)
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(fetchPeopleById(params.id))
+    }, [params.id])
 
     return (
         <div>
-            <h1>You opened the people page with ID = {id}</h1>
-            <div>{people[8].name}</div>
-            <div>{people[8].gender}</div>
-            <div>{people[8].skin_color}</div>
-            <div>{people[8].height}</div>
-            <div>{people[8].mass}</div>
-            <div>{people[8].eye_color}</div>
+            <h1>You opened the people page with ID {params.id}</h1>
         </div>
     );
 };

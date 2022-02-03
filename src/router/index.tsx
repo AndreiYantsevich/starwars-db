@@ -15,11 +15,11 @@ export interface IRoute {
 export enum RouteNames {
     HOME = '/',
     PEOPLES = '/people',
-    PEOPLE_ID_PAGE = '/people/:id/',
+    PEOPLE_ID_PAGE = '/people/:id',
     STARSHIPS = '/starships',
-    STARSHIP_ID_PAGE = '/starships/:id/',
+    STARSHIP_ID_PAGE = '/starships/:id',
     PLANETS = '/planets',
-    PLANET_ID_PAGE = '/planets/:id/'
+    PLANET_ID_PAGE = '/planets/:id'
 }
 
 export const routes: IRoute[] = [

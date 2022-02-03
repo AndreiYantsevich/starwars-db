@@ -13,9 +13,9 @@ const PeopleItem: FC<PropsType> = ({people}) => {
     return (
         <div>
             <div>
-                <strong>{people.name} {people.birth_year}</strong>
+                <strong>{people.uid} {people.name}</strong>
             </div>
-            <Button onClick={() => router(`/people/${Math.random()}/`)}>Open</Button>
+            <Button onClick={() => router(`/people/${people.uid}`)}>Open</Button>
         </div>
     );
 };
