@@ -3,28 +3,28 @@ import {IPeople} from "../store/reducers/types";
 
 
 const instance = axios.create({
-    baseURL: 'https://swapi.dev/api/'
+    baseURL: 'https://swapi.dev/api'
 })
 
 export const StarwarsService = {
     getAllPeople() {
-        return instance.get<getAllPeopleResponseType>('people/')
+        return instance.get<getAllPeopleResponseType>(`/people/`);
     },
     getPeopleById(id: number) {
-        return instance.get('people/' + id)
+        return instance.get<IPeople>(`/people/${id}`);
     },
     getAllStarships() {
-        return instance.get('starships/')
+        return instance.get(`/starships/`)
     },
     getStarshipsById(id: number) {
-        return instance.get('starships/' + id)
+        return instance.get(`/starships/${id}`)
     },
     getAllPlanets() {
-        return instance.get('planets/')
+        return instance.get(`/planets/`)
     },
     getPlanetsById(id: number) {
-        return instance.get('planets/' + id)
-    }
+        return instance.get(`/planets/${id}`)
+    },
 }
 
 type getAllPeopleResponseType = {

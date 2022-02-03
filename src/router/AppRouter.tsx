@@ -8,7 +8,7 @@ const AppRouter = () => {
             {routes.map(route =>
                 <Route key={route.path} path={route.path} element={<route.element/>}/>
             )}
-            <Route path='*' element={<Navigate to={RouteNames.MAIN}/>}/>
+            <Route path='*' element={<Navigate to={RouteNames.HOME}/>}/>
         </Routes>
     );
 };

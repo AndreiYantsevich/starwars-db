@@ -1,24 +1,33 @@
-import React from "react";
-import Peoples from "../components/people/Peoples";
-import Starships from "../components/starships/Starships";
-import Planets from "../components/planets/Planets";
-import Home from "../components/home/Home";
+import React from 'react';
+import Home from "../pages/home/Home";
+import Peoples from "../pages/people/Peoples";
+import PeopleIdPage from "../pages/people/PeopleIdPage";
+import Starships from "../pages/starships/Starships";
+import StarshipIdPage from "../pages/starships/StarshipIdPage";
+import Planets from "../pages/planets/Planets";
+import PlanetIdPage from "../pages/planets/PlanetIdPage";
 
 export interface IRoute {
     path: string;
-    element: any
+    element: React.ComponentType
 }
 
 export enum RouteNames {
-    MAIN = '/',
-    PEOPLE = '/people',
+    HOME = '/',
+    PEOPLES = '/people',
+    PEOPLE_ID_PAGE = '/people/:id/',
     STARSHIPS = '/starships',
-    PLANETS = '/planets'
+    STARSHIP_ID_PAGE = '/starships/:id/',
+    PLANETS = '/planets',
+    PLANET_ID_PAGE = '/planets/:id/'
 }
 
 export const routes: IRoute[] = [
-    {path: RouteNames.MAIN, element: Home},
-    {path: RouteNames.PEOPLE, element: Peoples},
+    {path: RouteNames.HOME, element: Home},
+    {path: RouteNames.PEOPLES, element: Peoples},
+    {path: RouteNames.PEOPLE_ID_PAGE, element: PeopleIdPage},
     {path: RouteNames.STARSHIPS, element: Starships},
+    {path: RouteNames.STARSHIP_ID_PAGE, element: StarshipIdPage},
     {path: RouteNames.PLANETS, element: Planets},
+    {path: RouteNames.PLANET_ID_PAGE, element: PlanetIdPage},
 ]

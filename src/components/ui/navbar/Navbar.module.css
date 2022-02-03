@@ -17,4 +17,6 @@
 
 .nav .nav_link:hover {
     background-color: #444;
+    border: 1px solid teal;
+    color: teal;
 }

@@ -13,24 +13,40 @@ type PeopleActions =
 
 type InitialStateType = typeof initialState
 
-const initialState: Array<IPeople> = []
+const initialState = {
+    peoples: [] as Array<IPeople>
+}
 
 
 export const PeopleReducer = (state = initialState, action: PeopleActions): InitialStateType => {
     switch (action.type) {
         case PeopleActionsEnum.GET_ALL_PEOPLE:
-            return action.peoples.map(p => ({...p}))
+            return {...state, peoples: action.peoples}
+        case PeopleActionsEnum.GET_PEOPLE_BY_ID:
+            return {
+                ...state,
+                peoples: state.peoples.filter(people => people === action.people)}
         default:
             return state
     }
 }
 
 export const setAllPeople = (peoples: Array<IPeople>) => ({type: PeopleActionsEnum.GET_ALL_PEOPLE, peoples} as const)
-export const setPeopleById = (id: number) => ({type: PeopleActionsEnum.GET_PEOPLE_BY_ID, id} as const)
+export const setPeopleById = (people: IPeople) => ({type: PeopleActionsEnum.GET_PEOPLE_BY_ID, people} as const)
 
-export const fetchAllPeople = (): ThunkType => (dispatch: AppDispatch) => {
-    StarwarsService.getAllPeople()
-        .then((res) => {
-            dispatch(setAllPeople(res.data.results))
-        })
+export const fetchAllPeople = (): ThunkType => async (dispatch: AppDispatch) => {
+    try {
+       const res = await StarwarsService.getAllPeople()
+        dispatch(setAllPeople(res.data.results))
+    } catch (e) {
+        console.log(e)
+    }
+}
+export const fetchPeopleById = (id: number): ThunkType => async (dispatch: AppDispatch) => {
+    try {
+        const res = await StarwarsService.getPeopleById(id)
+        dispatch(setPeopleById(res.data))
+    } catch (e) {
+        console.log(e)
+    }
 }
